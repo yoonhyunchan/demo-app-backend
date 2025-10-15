@@ -48,17 +48,17 @@ def create_app() -> Flask:
     def remove_session(_exc: Optional[BaseException]) -> None:
         SessionLocal.remove()
 
-    @app.get("/api/health")
+    @app.get("/health")
     def health() -> tuple:
         return jsonify({"status": "ok"}), 200
 
-    @app.get("/api/todos")
+    @app.get("/todos")
     def list_todos():
         session = SessionLocal()
         todos = session.query(Todo).order_by(Todo.id.desc()).all()
         return jsonify([t.to_dict() for t in todos])
 
-    @app.post("/api/todos")
+    @app.post("/todos")
     def create_todo():
         data = request.get_json(silent=True) or {}
         title = (data.get("title") or "").strip()
@@ -75,7 +75,7 @@ def create_app() -> Flask:
             session.rollback()
             abort(500, description=str(e))
 
-    @app.patch("/api/todos/<int:todo_id>")
+    @app.patch("/todos/<int:todo_id>")
     def update_todo(todo_id: int):
         data = request.get_json(silent=True) or {}
         session = SessionLocal()
@@ -98,7 +98,7 @@ def create_app() -> Flask:
             session.rollback()
             abort(500, description=str(e))
 
-    @app.delete("/api/todos/<int:todo_id>")
+    @app.delete("/todos/<int:todo_id>")
     def delete_todo(todo_id: int):
         session = SessionLocal()
         todo: Optional[Todo] = session.get(Todo, todo_id)
