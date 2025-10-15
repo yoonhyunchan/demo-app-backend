@@ -1,0 +1,57 @@
+# --- General ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+
+# --- Git ---
+.git-credentials
+
+# --- Env files ---
+.env
+.env.*
+!.env.example
+backend/.env
+
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+backend/.venv/
+.venv/
+venv/
+env/
+Pipfile.lock
+.poetry/
+.poetry-cache/
+.python-version
+coverage/
+htmlcov/
+*.cover
+*.py,cover
+
+# --- Editor/OS ---
+.vscode/
+.idea/
+*.iml
+*.orig
+
+# --- Tooling / Cursor ---
+.cursor/
+.agent/
+.agent-tools/
+.cache/
+
+# --- Database / runtime ---
+*.sqlite
+*.db
+*.pid
+
